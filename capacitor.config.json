@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "adminDyD",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
