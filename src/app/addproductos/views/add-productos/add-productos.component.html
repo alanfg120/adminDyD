@@ -5,48 +5,49 @@
     </ion-buttons>
     <ion-title>Agregar un producto</ion-title>
   </ion-toolbar>
-  <ion-item>
-    <ion-label>Nombre</ion-label>
-    <ion-input name="nombre" [(ngModel)]="producto.nombre"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Descripcion</ion-label>
-    <ion-textarea
-      rows="6"
-      cols="20"
-      name="descripcion"
-      [(ngModel)]="producto.descripcion"
-    ></ion-textarea>
-  </ion-item>
-  <ion-item>
-    <ion-label>Costo</ion-label>
-    <ion-input
-      name="costo"
-      [(ngModel)]="producto.costo"
-      type="number"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Precio de venta</ion-label>
-    <ion-input
-      name="costo"
-      [(ngModel)]="producto.precio"
-      type="number"
-    ></ion-input>
-  </ion-item>
-  <input
-    #csvInput
-    hidden="true"
-    type="file"
-    onclick="this.value=null"
-    accept="image/jpg"
-  />
-  <ion-button
-    (click)="csvInput.click()"
-    class="upload"
-  >
-    Subir foto
-  </ion-button>
+  <form #formproducto="ngForm" (ngSubmit)="addFormProducto(formproducto)">
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input name="nombre" [(ngModel)]="producto.nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Descripcion</ion-label>
+      <ion-textarea
+        rows="6"
+        cols="20"
+        name="descripcion"
+        [(ngModel)]="producto.descripcion"
+      ></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Costo</ion-label>
+      <ion-input
+        name="costo"
+        [(ngModel)]="producto.costo"
+        type="number"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Precio de venta</ion-label>
+      <ion-input
+        name="costo"
+        [(ngModel)]="producto.precio"
+        type="number"
+      ></ion-input>
+    </ion-item>
+    <input
+      #csvInput
+      hidden="true"
+      type="file"
+      onclick="this.value=null"
+      (change)="fileUpload($event)"
+      accept="image/jpg"
+    />
+    <ion-button (click)="csvInput.click()" class="upload">
+      Subir foto
+    </ion-button>
+  </form>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-button>
       <ion-icon name="add"></ion-icon>

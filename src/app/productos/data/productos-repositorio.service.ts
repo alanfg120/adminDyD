@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class ProductosRepositorioService {
   constructor(private http: HttpClient) {}
 
-  addProducto(producto: Producto): Observable<Producto> {
+  addProducto(producto: FormData): Observable<Producto> {
     return this.http.post<Producto>(`${environment.apiUrl}/productos/add`,producto);
   }
 }

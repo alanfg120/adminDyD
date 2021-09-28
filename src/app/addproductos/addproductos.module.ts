@@ -5,6 +5,7 @@ import { AddproductosRoutingModule } from './addproductos-routing.module';
 import { AddProductosComponent } from './views/add-productos/add-productos.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     AddproductosRoutingModule,
     IonicModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ]
 })
 export class AddproductosModule { }

@@ -13,7 +13,7 @@ export class ProductosService {
     private repositorio: ProductosRepositorioService
   ) {}
 
-  addProducto(producto: Producto): void {
+  addProducto(producto: FormData): void {
     this.repositorio.addProducto(producto).subscribe(
       (newProducto) => {
         this.store.update((state) => {
