@@ -13,19 +13,42 @@ export class ProductosService {
     private repositorio: ProductosRepositorioService
   ) {}
 
-  addProducto(producto: FormData): void {
-    this.repositorio.addProducto(producto).subscribe(
-      (newProducto) => {
+  async addProducto(producto: FormData): Promise<boolean> {
+    try {
+      const newProducto = await this.repositorio.addProducto(producto);
+      this.store.update((state) => {
+        state.productos.push(newProducto);
+        return {
+          ...state,
+        };
+      });
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+  async getProductos(): Promise<void> {
+    try {
+      const productos = await this.repositorio.getProductos();
+      this.store.update({ productos });
+      this.store.update({ loading: false });
+    } catch (error) {
+      console.log('Error', error);
+    }
+  }
+  async deleteProducto(id: number, index: number): Promise<boolean> {
+    try {
+      const deleteProducto = await this.repositorio.deleteProducto(id);
+      if (deleteProducto) {
         this.store.update((state) => {
-          state.productos.concat(newProducto);
-          return {
-            ...state,
-          };
+          state.productos.splice(index, 1);
+          return { ...state };
         });
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
       }
-    );
+      return deleteProducto;
+    } catch (error) {
+      console.log('Error', error);
+    }
   }
 }

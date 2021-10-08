@@ -1,42 +1,29 @@
-
-  <ion-content [fullscreen]="true" *ngIf="store.state | async as state">
-    <ion-toolbar>
-      <ion-buttons slot="secondary">
-        <ion-button>
-          <ion-icon slot="icon-only" name="search"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>Productos</ion-title>
-    </ion-toolbar>
-    <ion-list>
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="./avatar-finn.png">
-        </ion-avatar>
-        <ion-label>
-          <h2>Finn</h2>
-          <h3>I'm a big deal</h3>
-          <p>Listen, I've had a pretty messed up day...</p>
-        </ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="./avatar-han.png">
-        </ion-avatar>
-        <ion-label>
-          <h2>Han</h2>
-          <h3>Look, kid...</h3>
-          <p>I've got enough on my plate as it is, and I...</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button routerLink="/addProductos">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-  </ion-content>
-
-
-
+<ion-content [fullscreen]="true" *ngIf="store.state | async as state">
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Productos</ion-title>
+  </ion-toolbar>
+  <div *ngIf="state.loading">cargando...</div>
+  <ion-list *ngIf="!state.loading">
+    <ion-item *ngFor="let producto of state.productos; let i = index">
+      <ion-avatar slot="start">
+        <img [src]="'http://localhost:3000/productos/' + producto.imagen" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ producto.nombre }}</h2>
+        <h3>{{ producto.descripcion }}</h3>
+      </ion-label>
+      <ion-icon slot="end" name="create-outline" color="primary"></ion-icon>
+      <ion-icon slot="end" name="trash-outline" color="danger" (click)="deleteProdutoAlert(producto.id,i)"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/addProductos">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

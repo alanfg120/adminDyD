@@ -8,7 +8,11 @@
   <form #formproducto="ngForm" (ngSubmit)="addFormProducto(formproducto)">
     <ion-item>
       <ion-label>Nombre</ion-label>
-      <ion-input name="nombre" [(ngModel)]="producto.nombre"></ion-input>
+      <ion-input
+        name="nombre"
+        [(ngModel)]="producto.nombre"
+        required
+      ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Descripcion</ion-label>
@@ -17,6 +21,7 @@
         cols="20"
         name="descripcion"
         [(ngModel)]="producto.descripcion"
+        required
       ></ion-textarea>
     </ion-item>
     <ion-item>
@@ -25,6 +30,7 @@
         name="costo"
         [(ngModel)]="producto.costo"
         type="number"
+        required
       ></ion-input>
     </ion-item>
     <ion-item>
@@ -33,6 +39,7 @@
         name="costo"
         [(ngModel)]="producto.precio"
         type="number"
+        required
       ></ion-input>
     </ion-item>
     <input
@@ -42,16 +49,17 @@
       onclick="this.value=null"
       (change)="fileUpload($event)"
       accept="image/jpg"
+      required
     />
     <ion-button (click)="csvInput.click()" class="upload">
       Subir foto
     </ion-button>
-  </form>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-button>
-      <ion-icon name="add"></ion-icon>
-      agregar
-    </ion-button>
-  </ion-fab>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-button type="submit">
+        <ion-icon name="add"></ion-icon>
+        agregar
+      </ion-button>
+    </ion-fab>
+  </form>
 </ion-content>

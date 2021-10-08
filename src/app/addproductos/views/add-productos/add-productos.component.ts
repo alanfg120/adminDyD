@@ -1,6 +1,7 @@
 /* eslint-disable guard-for-in */
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import { Producto } from 'src/app/productos/model/producto.model';
 import { ProductosService } from 'src/app/productos/store/productos.service';
 
@@ -19,21 +20,59 @@ export class AddProductosComponent implements OnInit {
   };
   formData = new FormData();
 
-  constructor(private service: ProductosService) {}
+  constructor(
+    private service: ProductosService,
+    public toastController: ToastController
+  ) {}
 
   ngOnInit() {}
 
-  addFormProducto(form: NgForm): void {
+  async addFormProducto(form: NgForm): Promise<void> {
     if (form.valid) {
-      for (const key in this.producto) {
-        this.formData.append(key, this.producto[key]);
+      this.saveFormdata();
+      const addProducto = await this.service.addProducto(this.formData);
+      if (addProducto) {
+        this.snack('Producto creado');
+        form.reset();
+        this.resetFormdata();
       }
-      this.service.addProducto(this.formData);
+      if (!addProducto) {
+        this.snack('Error');
+        form.reset();
+        this.resetFormdata();
+      }
+    } else {
+      this.snack('Faltan Datos');
     }
   }
 
   fileUpload($event): void {
     const file = $event.target.files[0];
-    this.formData.append('file', file, `producto_img.jpg`);
+    if (!this.formData.has('file')) {
+      this.formData.append('file', file, `producto_img.jpg`);
+    }
+  }
+
+  private async snack(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'top',
+    });
+    toast.present();
+  }
+
+  private resetFormdata() {
+    for (const key in this.producto) {
+      this.formData.delete(key);
+    }
+    if (this.formData.has('file')) {
+      this.formData.delete('file');
+    }
+  }
+  private saveFormdata() {
+    for (const key in this.producto) {
+      this.formData.append(key, this.producto[key]);
+    }
   }
 }
