@@ -12,15 +12,19 @@ const routes: Routes = [
   },
   {
     path: 'addProductos',
-    loadChildren: () => import('./addproductos/addproductos.module').then( m => m.AddproductosModule)
+    loadChildren: () => import('./productos/addproductos/addproductos.module').then( m => m.AddproductosModule)
   },
   {
     path: 'updateProducto/:id',
-    loadChildren: () => import('./edit-producto/edit-producto.module').then( m => m.EditProductoModule)
+    loadChildren: () => import('./productos/edit-producto/edit-producto.module').then( m => m.EditProductoModule)
+  },
+  {
+    path: 'updateCaja/:id',
+    loadChildren: () => import('./cajas/edit-caja/edit-caja.module').then( m => m.EditCajaModule)
   },
   {
     path: 'addCaja',
-    loadChildren: () => import('./add-caja/add-caja.module').then( m => m.AddCajaModule)
+    loadChildren: () => import('./cajas/add-caja/add-caja.module').then( m => m.AddCajaModule)
   },
   {
     path: '',

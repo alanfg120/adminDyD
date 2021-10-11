@@ -22,4 +22,9 @@ export class CajasRepositorioService {
       .delete<boolean>(`${environment.apiUrl}/cajas/${id}`)
       .toPromise();
   }
+  updateCaja(caja: Caja): Promise<boolean> {
+    return this.http
+      .put<boolean>(`${environment.apiUrl}/cajas/update`,caja)
+      .toPromise();
+  }
 }

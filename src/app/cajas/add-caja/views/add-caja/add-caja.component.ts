@@ -39,7 +39,13 @@ export class AddCajaComponent implements OnInit {
       buttons: [
         {
           text: 'Guardar',
-          handler: () => console.log('Clicked Save!'),
+          handler: (event) => {
+            const fecha = new Date();
+            fecha.setMonth(event.month.value);
+            fecha.setFullYear(event.year.value);
+            fecha.setDate(event.day.value);
+            this.caja.fecha = fecha;
+          },
         },
       ],
     };

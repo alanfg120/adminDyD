@@ -10,7 +10,6 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
-import { AddproductosModule } from './addproductos/addproductos.module';
 import { CajasComponent } from './cajas/views/cajas/cajas.component';
 
 @NgModule({

@@ -50,4 +50,22 @@ export class CajasService {
       return false;
     }
   }
+  async updateCaja(caja: Caja): Promise<boolean> {
+    try {
+      const update = await this.repositorio.updateCaja(caja);
+      if (update) {
+        this.store.update((state) => {
+          const index = state.cajas.findIndex((c)=>c.id === caja.id);
+          state.cajas.splice(index, 1,caja);
+          return {
+            ...state,
+          };
+        });
+      }
+      return update;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 }

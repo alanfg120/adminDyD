@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home/productos"></ion-back-button>
+      <ion-back-button defaultHref="home/cajas"></ion-back-button>
     </ion-buttons>
     <ion-title>Agregar Caja</ion-title>
   </ion-toolbar>
@@ -13,6 +13,7 @@
         [monthShortNames]="meses"
         [(ngModel)]="caja.fecha"
         name="fecha"
+        [min]="caja.fecha"
       ></ion-datetime>
     </ion-item>
     <ion-item>
