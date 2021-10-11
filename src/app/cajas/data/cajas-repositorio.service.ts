@@ -17,4 +17,9 @@ export class CajasRepositorioService {
       .post<Caja>(`${environment.apiUrl}/cajas/add`, caja)
       .toPromise();
   }
+  deleteCaja(id: number): Promise<boolean> {
+    return this.http
+      .delete<boolean>(`${environment.apiUrl}/cajas/${id}`)
+      .toPromise();
+  }
 }

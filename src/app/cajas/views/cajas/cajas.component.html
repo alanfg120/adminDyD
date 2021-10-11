@@ -14,7 +14,7 @@
   <div *ngIf="state.loading">cargando...</div>
 
   <ion-list *ngIf="!state.loading">
-    <ion-card *ngFor="let caja of state.cajas">
+    <ion-card *ngFor="let caja of state.cajas; let index = index">
       <ion-card-header>
         <ion-card-title>Caja No {{ caja.id }} </ion-card-title>
         <ion-card-subtitle>
@@ -39,7 +39,7 @@
             <ion-icon name="create-outline"></ion-icon>
             <ion-label>Editar</ion-label>
           </ion-chip>
-          <ion-chip color="danger" outline>
+          <ion-chip color="danger" outline (click)="deleteCajaAlert(caja.id,index)">
             <ion-icon name="trash-outline"></ion-icon>
             <ion-label>Eliminar</ion-label>
           </ion-chip>

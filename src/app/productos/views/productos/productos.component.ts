@@ -20,10 +20,7 @@ export class ProductosComponent implements OnInit {
   }
   async deleteProdutoAlert(id: number, index: number) {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Eliminar Producto',
-      subHeader: '',
-      message: 'Desea Eliminar el producto?.',
+      message: 'Desea Eliminar el producto?',
       buttons: [
         {
           text: 'Aceptar',
@@ -42,7 +39,5 @@ export class ProductosComponent implements OnInit {
       ],
     });
     await alert.present();
-    const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
   }
 }

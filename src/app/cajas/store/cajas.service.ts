@@ -33,4 +33,21 @@ export class CajasService {
       console.log(error);
     }
   }
+  async deleteCaja(id: number, index: number): Promise<boolean> {
+    try {
+      const deleteCaja = await this.repositorio.deleteCaja(id);
+      if (deleteCaja) {
+        this.store.update((state) => {
+          state.cajas.splice(index, 1);
+          return {
+            ...state,
+          };
+        });
+      }
+      return deleteCaja;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 }
