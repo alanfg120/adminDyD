@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CajasService } from './cajas/store/cajas.service';
 import { ProductosService } from './productos/store/productos.service';
 
 @Component({
@@ -7,7 +8,11 @@ import { ProductosService } from './productos/store/productos.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private productoService: ProductosService) {
+  constructor(
+    private productoService: ProductosService,
+    private cajasService: CajasService
+  ) {
     this.productoService.getProductos();
+    this.cajasService.getCajas();
   }
 }

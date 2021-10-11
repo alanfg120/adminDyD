@@ -7,11 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [ProductosComponent],
-  imports: [
-    CommonModule,
-    ProductosRoutingModule,
-    IonicModule,
-    HttpClientModule,
-  ],
+  imports: [CommonModule, ProductosRoutingModule, IonicModule],
 })
 export class ProductosModule {}

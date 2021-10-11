@@ -1,0 +1,40 @@
+<ion-content [fullscreen]="true" *ngIf="store.state | async as state">
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Cajas</ion-title>
+  </ion-toolbar>
+  <div *ngIf="state.loading">cargando...</div>
+  <ion-item>
+    <ion-label>Fecha</ion-label>
+    <ion-datetime [pickerOptions]="options" [monthShortNames]="meses"></ion-datetime>
+  </ion-item>
+  <ion-list *ngIf="!state.loading">
+    <ion-item *ngFor="let caja of state.cajas; let i = index">
+   <!--    <ion-avatar slot="start">
+        <img [src]="'http://localhost:3000/productos/' + producto.imagen" />
+      </ion-avatar> -->
+      <ion-label>
+        <h2>{{ caja.base }}</h2>
+      </ion-label>
+      <ion-icon
+        slot="end"
+        name="create-outline"
+        color="primary"
+      ></ion-icon>
+      <ion-icon
+        slot="end"
+        name="trash-outline"
+        color="danger"
+      ></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/addCaja">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

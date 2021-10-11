@@ -10,6 +10,10 @@ const routes: Routes = [
       {
         path:'productos',
         loadChildren : ()=> import('./../productos/productos.module').then(m=>m.ProductosModule)
+      },
+      {
+        path:'cajas',
+        loadChildren : ()=> import('./../cajas/caja/caja-routing.module').then(m=>m.CajaRoutingModule)
       }
     ]
   }

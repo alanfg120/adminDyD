@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: () => import('./edit-producto/edit-producto.module').then( m => m.EditProductoModule)
   },
   {
+    path: 'addCaja',
+    loadChildren: () => import('./add-caja/add-caja.module').then( m => m.AddCajaModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
