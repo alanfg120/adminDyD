@@ -8,10 +8,7 @@
     <ion-title>Cajas</ion-title>
   </ion-toolbar>
   <div *ngIf="state.loading">cargando...</div>
-  <ion-item>
-    <ion-label>Fecha</ion-label>
-    <ion-datetime [pickerOptions]="options" [monthShortNames]="meses"></ion-datetime>
-  </ion-item>
+
   <ion-list *ngIf="!state.loading">
     <ion-item *ngFor="let caja of state.cajas; let i = index">
    <!--    <ion-avatar slot="start">
