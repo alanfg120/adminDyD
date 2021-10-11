@@ -15,8 +15,10 @@ export class ProductosComponent implements OnInit {
     private service: ProductosService
   ) {}
 
-  ngOnInit() {}
-  async deleteProdutoAlert(id: number,index: number) {
+  ngOnInit() {
+
+  }
+  async deleteProdutoAlert(id: number, index: number) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Eliminar Producto',
@@ -28,7 +30,7 @@ export class ProductosComponent implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-           this.service.deleteProducto(id,index);
+            this.service.deleteProducto(id, index);
           },
         },
         {

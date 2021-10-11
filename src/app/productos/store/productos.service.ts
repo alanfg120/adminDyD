@@ -51,4 +51,19 @@ export class ProductosService {
       console.log('Error', error);
     }
   }
+  async updateProducto(formData: FormData, producto: Producto): Promise<boolean> {
+    try {
+      const updateProducto = await this.repositorio.updateProducto(formData);
+      if (updateProducto) {
+        this.store.update((state) => {
+          const index = state.productos.findIndex((p) => p.id === producto.id);
+          state.productos.splice(index, 1,producto);
+          return { ...state };
+        });
+      }
+      return updateProducto;
+    } catch (error) {
+      console.log('Error', error);
+    }
+  }
 }

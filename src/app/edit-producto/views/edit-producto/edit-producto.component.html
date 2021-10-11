@@ -3,9 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home/productos"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ update ? 'Editar un Producto' : 'Agregar un Producto'}}</ion-title>
+    <ion-title>Editar un Producto</ion-title>
   </ion-toolbar>
-  <form #formproducto="ngForm" (ngSubmit)="addFormProducto(formproducto)">
+  <form #formproducto="ngForm" (ngSubmit)="updateFormProducto(formproducto)" *ngIf="producto">
     <ion-item>
       <ion-label>Nombre</ion-label>
       <ion-input
@@ -58,7 +58,7 @@
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-button type="submit">
         <ion-icon name="add"></ion-icon>
-        agregar
+        Editar
       </ion-button>
     </ion-fab>
   </form>

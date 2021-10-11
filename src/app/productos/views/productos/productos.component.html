@@ -17,8 +17,18 @@
         <h2>{{ producto.nombre }}</h2>
         <h3>{{ producto.descripcion }}</h3>
       </ion-label>
-      <ion-icon slot="end" name="create-outline" color="primary"></ion-icon>
-      <ion-icon slot="end" name="trash-outline" color="danger" (click)="deleteProdutoAlert(producto.id,i)"></ion-icon>
+      <ion-icon
+        slot="end"
+        name="create-outline"
+        color="primary"
+        [routerLink]="'/updateProducto/' + producto.id"
+      ></ion-icon>
+      <ion-icon
+        slot="end"
+        name="trash-outline"
+        color="danger"
+        (click)="deleteProdutoAlert(producto.id, i)"
+      ></ion-icon>
     </ion-item>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

@@ -7,10 +7,6 @@ import { ProductosService } from '../productos/store/productos.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  constructor(private productoService: ProductosService) {}
-  ngOnInit(): void {
-    this.productoService.getProductos();
-  }
-
+  constructor() {}
+  ngOnInit(): void {}
 }

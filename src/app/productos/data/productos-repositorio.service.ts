@@ -19,4 +19,8 @@ export class ProductosRepositorioService {
   deleteProducto(id: number): Promise<boolean> {
     return this.http.delete<boolean>(`${environment.apiUrl}/productos/${id}`).toPromise();
   }
+
+  updateProducto(producto: FormData): Promise<boolean> {
+    return this.http.put<boolean>(`${environment.apiUrl}/productos/update`,producto).toPromise();
+  }
 }

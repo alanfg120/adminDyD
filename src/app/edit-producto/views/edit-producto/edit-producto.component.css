@@ -1,0 +1,14 @@
+ion-label {
+  color: grey !important;
+}
+
+ion-input {
+  text-align: right !important;
+}
+
+
+.upload {
+  float: right;
+  margin-top: 50px;
+  margin-right: 10px;
+}

@@ -15,8 +15,12 @@ const routes: Routes = [
     loadChildren: () => import('./addproductos/addproductos.module').then( m => m.AddproductosModule)
   },
   {
+    path: 'updateProducto/:id',
+    loadChildren: () => import('./edit-producto/edit-producto.module').then( m => m.EditProductoModule)
+  },
+  {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
 ];
