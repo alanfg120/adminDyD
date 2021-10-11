@@ -8,9 +8,22 @@
   <form #formcaja="ngForm" (ngSubmit)="addCaja(formcaja)">
     <ion-item>
       <ion-label>Fecha</ion-label>
-      <ion-datetime [pickerOptions]="options" [monthShortNames]="meses" [(ngModel)]="fecha" name="fecha" displayFormat="D MMMM  de YYYY"></ion-datetime>
+      <ion-datetime
+        [pickerOptions]="options"
+        [monthShortNames]="meses"
+        [(ngModel)]="caja.fecha"
+        name="fecha"
+      ></ion-datetime>
     </ion-item>
-
+    <ion-item>
+      <ion-label>Base</ion-label>
+      <ion-input
+        name="base"
+        [(ngModel)]="caja.base"
+        type="number"
+        required
+      ></ion-input>
+    </ion-item>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-button type="submit">
         <ion-icon name="add"></ion-icon>

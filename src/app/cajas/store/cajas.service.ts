@@ -15,7 +15,20 @@ export class CajasService {
   async getCajas(): Promise<void> {
     try {
       const cajas = await this.repositorio.getCajas();
-      this.store.update({cajas,loading: false});
+      this.store.update({ cajas, loading: false });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async addCaja(caja: Caja): Promise<void> {
+    try {
+      const newCaja = await this.repositorio.addCajas(caja);
+      this.store.update((state) => {
+        state.cajas.push(newCaja);
+        return {
+          ...state,
+        };
+      });
     } catch (error) {
       console.log(error);
     }

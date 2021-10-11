@@ -1,4 +1,5 @@
 export interface Caja {
-  fecha: Date;
+  id?: number;
+  fecha: Date | string;
   base: number;
 }

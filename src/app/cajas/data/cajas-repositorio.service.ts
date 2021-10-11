@@ -12,4 +12,9 @@ export class CajasRepositorioService {
   getCajas(): Promise<Caja[]> {
     return this.http.get<Caja[]>(`${environment.apiUrl}/cajas`).toPromise();
   }
+  addCajas(caja: Caja): Promise<Caja> {
+    return this.http
+      .post<Caja>(`${environment.apiUrl}/cajas/add`, caja)
+      .toPromise();
+  }
 }
