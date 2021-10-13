@@ -1,0 +1,36 @@
+<ion-content [fullscreen]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Agregar un Gasto</ion-title>
+  </ion-toolbar>
+  <form #formgasto="ngForm" (ngSubmit)="addFormGasto(formgasto)">
+    <ion-item>
+      <ion-label>Descripcion</ion-label>
+      <ion-input
+        name="descripcion"
+        type="text"
+        [(ngModel)]="descripcion"
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Costo</ion-label>
+      <ion-input
+        name="costo"
+        type="text"
+        [(ngModel)]="costo"
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-button type="submit">
+        <ion-icon name="add"></ion-icon>
+        agregar
+      </ion-button>
+    </ion-fab>
+  </form>
+</ion-content>

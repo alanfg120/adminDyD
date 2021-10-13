@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home/cajas"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gastos</ion-title>
+  </ion-toolbar>
+  <!-- <div *ngIf="state.loading">cargando...</div> -->
+  <ion-list>
+    <ion-item *ngFor="let gasto of gastos; let index = index">
+      <ion-label>
+        <h2>Costo: ${{ gasto.costo }}</h2>
+        <h3>{{ gasto.descripcion }}</h3>
+      </ion-label>
+      <ion-icon
+        slot="end"
+        name="create-outline"
+        color="primary"
+        (click)="updateGastoAlert(gasto, index)"
+      ></ion-icon>
+      <ion-icon
+        slot="end"
+        name="trash-outline"
+        color="danger"
+        (click)="deleteGastoAlert(gasto.id, index)"
+      ></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button>
+      <ion-icon
+        name="add"
+        (click)="addGastoModal()"
+      ></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

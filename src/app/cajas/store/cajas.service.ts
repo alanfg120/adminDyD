@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { GastosRepocitorioService } from 'src/app/gastos/data/gastos-repocitorio.service';
+import { Gasto } from 'src/app/gastos/models/gastos.model';
 import { InventariosRepocitorioService } from 'src/app/inventarios/data/inventarios-repocitorio.service';
 import { Inventario } from 'src/app/inventarios/models/inventario.model';
 import { InventarioDb } from 'src/app/inventarios/models/inventarioPost.mdel';
@@ -13,7 +15,8 @@ export class CajasService {
   constructor(
     private store: CajasStore,
     private repositorio: CajasRepositorioService,
-    private repoInventario: InventariosRepocitorioService
+    private repoInventario: InventariosRepocitorioService,
+    private repoGasto: GastosRepocitorioService
   ) {}
 
   async getCajas(): Promise<void> {
@@ -24,10 +27,12 @@ export class CajasService {
       console.log(error);
     }
   }
+
   async addCaja(caja: Caja): Promise<void> {
     try {
       const newCaja = await this.repositorio.addCajas(caja);
       newCaja.inventarios = [];
+      newCaja.gastos = [];
       this.store.update((state) => {
         state.cajas.push(newCaja);
         return {
@@ -38,6 +43,7 @@ export class CajasService {
       console.log(error);
     }
   }
+
   async deleteCaja(id: number, index: number): Promise<boolean> {
     try {
       const deleteCaja = await this.repositorio.deleteCaja(id);
@@ -55,6 +61,7 @@ export class CajasService {
       return false;
     }
   }
+
   async updateCaja(caja: Caja): Promise<boolean> {
     try {
       const update = await this.repositorio.updateCaja(caja);
@@ -99,6 +106,7 @@ export class CajasService {
       return false;
     }
   }
+
   async deleteInventario(
     idCaja: number,
     idProducto: number,
@@ -135,6 +143,51 @@ export class CajasService {
         state.cajas[index].inventarios.push(newInventario);
         return { ...state };
       });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async addGasto(gasto: Gasto): Promise<void> {
+    try {
+      const newGasto = await this.repoGasto.addGasto(gasto);
+      this.store.update((state) => {
+        const index = state.cajas.findIndex((c) => c.id === gasto.id_caja);
+        state.cajas[index].gastos.push(newGasto);
+        return { ...state };
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async updateGasto(gasto: Gasto, indexGasto: number): Promise<boolean> {
+    try {
+      const update = await this.repoGasto.updateGasto(gasto);
+      if (update) {
+        this.store.update((state) => {
+          const index = state.cajas.findIndex((c) => c.id === gasto.id_caja);
+          state.cajas[index].gastos.splice(indexGasto, 1, gasto);
+          return { ...state };
+        });
+      }
+      return update;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  async deleteGasto(idGasto: number, idCaja: number, indexGasto: number) {
+    try {
+      const deleteGasto = await this.repoGasto.deleteGasto(idGasto);
+      if (deleteGasto) {
+        this.store.update((state) => {
+          const index = state.cajas.findIndex((c) => c.id === idCaja);
+          state.cajas[index].gastos.splice(indexGasto, 1);
+          return { ...state };
+        });
+      }
     } catch (error) {
       console.log(error);
     }

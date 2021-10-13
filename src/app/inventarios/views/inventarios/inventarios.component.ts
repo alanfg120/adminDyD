@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
-import { Caja } from 'src/app/cajas/models/caja.model';
 import { CajasQuery } from 'src/app/cajas/store/cajas.query';
 import { CajasService } from 'src/app/cajas/store/cajas.service';
 import { ProductosQuery } from 'src/app/productos/store/productos.query';
@@ -19,7 +18,6 @@ export class InventariosComponent implements OnInit {
 
   constructor(
     public store: CajasQuery,
-    private storeProductos: ProductosQuery,
     public alertController: AlertController,
     private service: CajasService,
     private router: ActivatedRoute,
