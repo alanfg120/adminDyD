@@ -14,7 +14,11 @@ const routes: Routes = [
       {
         path:'cajas',
         loadChildren : ()=> import('./../cajas/caja/caja-routing.module').then(m=>m.CajaRoutingModule)
-      }
+      },
+      {
+        path: 'ventas',
+        loadChildren: () => import('./../ventas/ventas.module').then( m => m.VentasModule)
+      },
     ]
   }
 ];
