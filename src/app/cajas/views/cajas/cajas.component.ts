@@ -23,7 +23,6 @@ export class CajasComponent implements OnInit {
       buttons: [
         {
           text: 'Aceptar',
-          role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
             this.deleteCaja(id, index);
@@ -31,6 +30,7 @@ export class CajasComponent implements OnInit {
         },
         {
           text: 'Cancelar',
+          role: 'cancel',
           handler: () => {
             console.log('Confirm Okay');
           },

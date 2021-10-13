@@ -1,0 +1,43 @@
+<ion-content
+  [fullscreen]="true"
+  *ngIf="storeProductos.state | async as productosState"
+>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Agregar un Producto</ion-title>
+  </ion-toolbar>
+  <form #formproducto="ngForm" (ngSubmit)="addFormProducto(formproducto)">
+    <ion-item>
+      <ion-label>Selecione el Producto</ion-label>
+      <ion-select
+        cancelText="Cancelar"
+        okText="Selecionar"
+        mode="ios"
+        interface="action-sheet"
+        name="producto"
+        [(ngModel)]="idProducto"
+      >
+        <ion-select-option
+          [value]="producto.id"
+          *ngFor="let producto of productosState.productos"
+          >{{ producto.nombre }}</ion-select-option
+        >
+
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Cantidad</ion-label>
+      <ion-input name="cantidad" type="number"  [(ngModel)]="cantidad" required></ion-input>
+    </ion-item>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-button type="submit">
+        <ion-icon name="add"></ion-icon>
+        agregar
+      </ion-button>
+    </ion-fab>
+  </form>
+</ion-content>

@@ -1,7 +1,7 @@
 <ion-content
   [fullscreen]="true"
   *ngIf="store.state | async as state"
-  class="ion-padding"
+
 >
   <ion-toolbar>
     <ion-buttons slot="secondary">
@@ -13,7 +13,7 @@
   </ion-toolbar>
   <div *ngIf="state.loading">cargando...</div>
 
-  <ion-list *ngIf="!state.loading">
+  <ion-list *ngIf="!state.loading" class="ion-padding">
     <ion-card *ngFor="let caja of state.cajas; let index = index">
       <ion-card-header>
         <ion-card-title>Caja No {{ caja.id }} </ion-card-title>
@@ -24,13 +24,13 @@
       <ion-card-content>
         <strong>Base del dia:</strong> $ {{ caja.base }}
         <ion-list lines="none">
-          <ion-item detail button>
+          <ion-item detail button [routerLink]="'/inventario/'+caja.id">
             <ion-label>Inventario</ion-label>
           </ion-item>
           <ion-item detail button>
             <ion-label>Gastos</ion-label>
           </ion-item>
-          <ion-item detail button>
+          <ion-item detail button [routerLink]="'/inventario/' + caja.id">
             <ion-label>Ventas</ion-label>
           </ion-item>
         </ion-list>

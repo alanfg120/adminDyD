@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./cajas/add-caja/add-caja.module').then( m => m.AddCajaModule)
   },
   {
+    path: 'inventario/:id',
+    loadChildren: () => import('./inventarios/inventarios.module').then( m => m.InventariosModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
