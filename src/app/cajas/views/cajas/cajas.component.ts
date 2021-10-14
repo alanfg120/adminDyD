@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { CajasQuery } from '../../store/cajas.query';
 import { CajasService } from '../../store/cajas.service';
 
@@ -12,7 +12,8 @@ export class CajasComponent implements OnInit {
   constructor(
     public store: CajasQuery,
     public alertController: AlertController,
-    private service: CajasService
+    private service: CajasService,
+    private toast: ToastController
   ) {}
 
   ngOnInit(): void {}
@@ -39,11 +40,35 @@ export class CajasComponent implements OnInit {
     });
     await alert.present();
   }
+  async activarCaja(event, id: number) {
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+    event.preventDefault();
+    try {
+      const active = await this.service.activarCaja(id, event.detail.checked);
+      if (active) {
+        this.snack('Caja Activada');
+      } else {
+        this.snack('Caja Desactivada');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   private async deleteCaja(id: number, index: number) {
     const deleteCaja = await this.service.deleteCaja(id, index);
     if (!deleteCaja) {
       this.alertController.dismiss();
     }
+  }
+
+  private async snack(message: string) {
+    const toast = await this.toast.create({
+      message,
+      duration: 2000,
+      position: 'top',
+    });
+    toast.present();
   }
 }
