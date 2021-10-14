@@ -13,7 +13,7 @@ const routes: Routes = [
       },
       {
         path:'cajas',
-        loadChildren : ()=> import('./../cajas/caja/caja-routing.module').then(m=>m.CajaRoutingModule)
+        loadChildren : ()=> import('./../cajas/cajas.module').then(m=>m.CajasModule)
       },
       {
         path: 'ventas',

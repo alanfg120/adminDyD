@@ -4,10 +4,12 @@ import { Venta } from '../models/venta.model';
 
 export interface VentasState {
   ventas: Venta[];
+  loading: boolean;
 }
 
 export const createInitialState: VentasState = {
   ventas: [],
+  loading: true
 };
 
 @Injectable({ providedIn: 'root' })

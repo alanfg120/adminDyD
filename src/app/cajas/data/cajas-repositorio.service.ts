@@ -24,7 +24,11 @@ export class CajasRepositorioService {
   }
   updateCaja(caja: Caja): Promise<boolean> {
     return this.http
-      .put<boolean>(`${environment.apiUrl}/cajas/update`,caja)
+      .put<boolean>(`${environment.apiUrl}/cajas/update`, caja)
       .toPromise();
+  }
+
+  activarCaja(id: number,activar: boolean): Promise<boolean> {
+    return this.http.put<boolean>(`${environment.apiUrl}/cajas/activar`,{id,activar}).toPromise();
   }
 }

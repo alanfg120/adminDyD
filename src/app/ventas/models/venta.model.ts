@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Producto } from 'src/app/productos/model/producto.model';
+import { ProductoFacturado } from './productoFacturados.model';
 
 export interface Venta {
   numero: number;
-  id_producto?: number;
-  productos: Producto[];
+  productos: ProductoFacturado[];
   id_caja?: number;
-  cantidad: number;
   total?: number;
+  subtotal?: number;
+  fecha: Date;
 }

@@ -1,0 +1,28 @@
+<ion-content [fullscreen]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Factura No 000{{ venta.numero }}</ion-title>
+  </ion-toolbar>
+  <ion-list>
+    <ion-item *ngFor="let factura of venta.productos; let index = index">
+      <ion-avatar slot="start">
+        <img
+          [src]="'http://localhost:3000/productos/' + factura.producto.imagen"
+        />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ factura.producto.nombre }}</h2>
+        <h3>Precio: $ {{ factura.producto.precio }}</h3>
+        <h3>Cantidad: {{ factura.cantidad }}</h3>
+      </ion-label>
+      <h3>${{ factura.producto.precio * factura.cantidad }}</h3>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+   <h1>Total: $ {{venta.total}}</h1>
+  </ion-fab>
+</ion-content>

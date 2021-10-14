@@ -8,4 +8,5 @@ export interface Caja {
   base: number;
   inventarios?: Inventario[];
   gastos?: Gasto[];
+  activa?: boolean;
 }

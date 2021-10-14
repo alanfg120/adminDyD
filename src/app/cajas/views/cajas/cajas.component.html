@@ -1,8 +1,4 @@
-<ion-content
-  [fullscreen]="true"
-  *ngIf="store.state | async as state"
-
->
+<ion-content [fullscreen]="true" *ngIf="store.state | async as state">
   <ion-toolbar>
     <ion-buttons slot="secondary">
       <ion-button>
@@ -16,15 +12,23 @@
   <ion-list *ngIf="!state.loading" class="ion-padding">
     <ion-card *ngFor="let caja of state.cajas; let index = index">
       <ion-card-header>
-        <ion-card-title>Caja No {{ caja.id }} </ion-card-title>
+        <ion-card-title class="titulo">
+          <span> Caja No {{ caja.id }} </span>
+          <ion-toggle
+            [(ngModel)]="caja.activa"
+            (ionChange)="activarCaja($event,caja.id)"
+          ></ion-toggle>
+        </ion-card-title>
         <ion-card-subtitle>
           {{ caja.fecha | date: "dd/MM/yyyy" }}
         </ion-card-subtitle>
+        <ion-card-subtitle>
+          <strong>Base del dia:</strong> $ {{ caja.base }}
+        </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <strong>Base del dia:</strong> $ {{ caja.base }}
         <ion-list lines="none">
-          <ion-item detail button [routerLink]="'/inventario/'+caja.id">
+          <ion-item detail button [routerLink]="'/inventario/' + caja.id">
             <ion-label>Inventario</ion-label>
           </ion-item>
           <ion-item detail button [routerLink]="'/gastos/' + caja.id">
@@ -35,11 +39,19 @@
           </ion-item>
         </ion-list>
         <div class="actions">
-          <ion-chip color="success" outline [routerLink]="'/updateCaja/'+caja.id">
+          <ion-chip
+            color="success"
+            outline
+            [routerLink]="'/updateCaja/' + caja.id"
+          >
             <ion-icon name="create-outline"></ion-icon>
             <ion-label>Editar</ion-label>
           </ion-chip>
-          <ion-chip color="danger" outline (click)="deleteCajaAlert(caja.id,index)">
+          <ion-chip
+            color="danger"
+            outline
+            (click)="deleteCajaAlert(caja.id, index)"
+          >
             <ion-icon name="trash-outline"></ion-icon>
             <ion-label>Eliminar</ion-label>
           </ion-chip>

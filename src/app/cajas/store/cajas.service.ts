@@ -192,4 +192,16 @@ export class CajasService {
       console.log(error);
     }
   }
+
+  async activarCaja(id: number, activar): Promise<boolean> {
+    try {
+      const activa = await this.repositorio.activarCaja(id, activar);
+      if (activa) {
+        return activar;
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 }
