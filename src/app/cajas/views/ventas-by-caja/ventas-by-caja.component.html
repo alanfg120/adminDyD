@@ -1,15 +1,15 @@
-<ion-content [fullscreen]="true" *ngIf="store.state | async as state">
+<ion-content [fullscreen]="true">
   <ion-toolbar>
-    <ion-buttons slot="secondary">
-      <ion-button (click)="reloadVentas()">
-        <ion-icon slot="icon-only" name="reload-outline"></ion-icon>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>Ventas</ion-title>
   </ion-toolbar>
-  <div *ngIf="state.loading">cargando...</div>
-  <ion-list *ngIf="!state.loading">
-    <ion-item *ngFor="let venta of state.ventas; let i = index">
+
+  <ion-list>
+    <ion-item *ngFor="let venta of ventas; let i = index">
       <ion-label>
         <h2> Factura No 000{{ venta.numero }}</h2>
         <h3>Fecha: {{ venta.fecha | date: 'dd/MM/yyyy' }}</h3>
@@ -24,5 +24,8 @@
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   </ion-fab>
 </ion-content>
-
+<ion-footer class="ion-padding">
+  <h3>Ganacia: $ {{ total - subtotal }}</h3>
+  <h3>Total: $ {{ total }}</h3>
+</ion-footer>
 

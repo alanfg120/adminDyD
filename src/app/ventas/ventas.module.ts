@@ -13,6 +13,7 @@ import { DetalleVentaComponent } from './views/detalle-venta/detalle-venta.compo
     VentasComponent,
     DetalleVentaComponent
   ],
+  exports:[DetalleVentaComponent],
   imports: [
     CommonModule,
     VentasRoutingModule,

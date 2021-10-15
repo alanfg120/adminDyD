@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import { Caja } from 'src/app/cajas/models/caja.model';
 import { ProductoFacturado } from './productoFacturados.model';
 
 export interface Venta {

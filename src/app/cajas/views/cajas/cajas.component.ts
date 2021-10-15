@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  ModalController,
+  ToastController,
+} from '@ionic/angular';
+import { Venta } from 'src/app/ventas/models/venta.model';
+import { DetalleVentaComponent } from 'src/app/ventas/views/detalle-venta/detalle-venta.component';
 import { CajasQuery } from '../../store/cajas.query';
 import { CajasService } from '../../store/cajas.service';
+import { VentasByCajaComponent } from '../ventas-by-caja/ventas-by-caja.component';
 
 @Component({
   selector: 'app-cajas',
@@ -13,7 +20,8 @@ export class CajasComponent implements OnInit {
     public store: CajasQuery,
     public alertController: AlertController,
     private service: CajasService,
-    private toast: ToastController
+    private toast: ToastController,
+    private modal: ModalController
   ) {}
 
   ngOnInit(): void {}
@@ -40,6 +48,7 @@ export class CajasComponent implements OnInit {
     });
     await alert.present();
   }
+
   async activarCaja(event, id: number) {
     event.stopImmediatePropagation();
     event.stopPropagation();
@@ -53,6 +62,18 @@ export class CajasComponent implements OnInit {
       }
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async ventasModal(ventas: Venta[]) {
+    if (ventas) {
+      const modal = await this.modal.create({
+        component: VentasByCajaComponent,
+        componentProps: {
+          ventas,
+        },
+      });
+      return await modal.present();
     }
   }
 

@@ -4,6 +4,7 @@ import { Gasto } from 'src/app/gastos/models/gastos.model';
 import { InventariosRepocitorioService } from 'src/app/inventarios/data/inventarios-repocitorio.service';
 import { Inventario } from 'src/app/inventarios/models/inventario.model';
 import { InventarioDb } from 'src/app/inventarios/models/inventarioPost.mdel';
+import { Venta } from 'src/app/ventas/models/venta.model';
 import { CajasRepositorioService } from '../data/cajas-repositorio.service';
 import { Caja } from '../models/caja.model';
 import { CajasStore } from './cajas.store';
@@ -22,7 +23,11 @@ export class CajasService {
   async getCajas(): Promise<void> {
     try {
       const cajas = await this.repositorio.getCajas();
-      this.store.update({ cajas, loading: false });
+      const cajasWithTotal = cajas.map((caja) => {
+        caja.ventas = this.calcTotal(caja.ventas);
+        return caja;
+      });
+      this.store.update({ cajas: cajasWithTotal, loading: false });
     } catch (error) {
       console.log(error);
     }
@@ -33,6 +38,7 @@ export class CajasService {
       const newCaja = await this.repositorio.addCajas(caja);
       newCaja.inventarios = [];
       newCaja.gastos = [];
+      newCaja.ventas = [];
       this.store.update((state) => {
         state.cajas.push(newCaja);
         return {
@@ -203,5 +209,25 @@ export class CajasService {
       console.log(error);
       return false;
     }
+  }
+
+  private calcTotal(ventas: Venta[]) {
+    const ventasWithTotal = ventas.map((venta) => {
+      let total = 0;
+      let subtotal = 0;
+      venta.productos.forEach((productoFacturado) => {
+        total =
+          total +
+          productoFacturado.cantidad * productoFacturado.producto.precio;
+        subtotal =
+          subtotal +
+          productoFacturado.cantidad * productoFacturado.producto.costo;
+      });
+      venta.total = total;
+      venta.subtotal = subtotal;
+      return venta;
+    });
+
+    return ventasWithTotal;
   }
 }

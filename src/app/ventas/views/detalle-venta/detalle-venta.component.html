@@ -22,7 +22,8 @@
       <h3>${{ factura.producto.precio * factura.cantidad }}</h3>
     </ion-item>
   </ion-list>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-   <h1>Total: $ {{venta.total}}</h1>
-  </ion-fab>
 </ion-content>
+<ion-footer class="ion-padding">
+  <h3>Ganacia: $ {{ venta.total - venta.subtotal }}</h3>
+  <h3>Total: $ {{ venta.total }}</h3>
+</ion-footer>

@@ -21,7 +21,8 @@ export class VentasService {
       console.log(error);
     }
   }
-  calcTotal(ventas: Venta[]) {
+
+  private calcTotal(ventas: Venta[]) {
     const ventasWithTotal = ventas.map((venta) => {
       let total = 0;
       let subtotal = 0;
@@ -40,4 +41,5 @@ export class VentasService {
 
     return ventasWithTotal;
   }
+
 }
